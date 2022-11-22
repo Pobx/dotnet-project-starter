@@ -10,6 +10,7 @@ public static class PostgreSQLInfrastructureRegistration
 {
     public static IServiceCollection AddPostgreSQLInfrastructureRegistration(this IServiceCollection services, IConfiguration configuration)
     {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         var migrationsAssembly = configuration["ProjectName"]?.ToString() ?? throw new ArgumentNullException("Project name not setting");
 
         services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(
