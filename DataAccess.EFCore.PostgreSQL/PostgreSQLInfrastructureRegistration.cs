@@ -22,6 +22,8 @@ public static class PostgreSQLInfrastructureRegistration
         services.AddTransient<IExampleRepository, ExampleRepository>();
         #endregion
 
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
+
         return services;
     }
 }

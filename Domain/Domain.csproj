@@ -9,9 +9,15 @@
   <ItemGroup>
     <None Remove="Interfaces\" />
     <None Remove="Entities\" />
+    <None Remove="DTO\" />
+    <None Remove="DTO\Request\" />
+    <None Remove="DTO\Response\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Entities\" />
+    <Folder Include="DTO\" />
+    <Folder Include="DTO\Request\" />
+    <Folder Include="DTO\Response\" />
   </ItemGroup>
 </Project>

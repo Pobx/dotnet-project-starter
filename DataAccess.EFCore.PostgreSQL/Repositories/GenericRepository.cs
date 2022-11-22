@@ -17,12 +17,12 @@ namespace DataAccess.EFCore.PostgreSQL.Repositories
             _entities = context.Set<T>();
         }
 
-        public async Task Add(T entity)
+        public async Task AddAsync(T entity)
         {
             await _entities.AddAsync(entity);
         }
 
-        public async Task AddRange(IEnumerable<T> entities)
+        public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             await _entities.AddRangeAsync(entities);
         }

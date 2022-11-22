@@ -1,33 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.DTO.Response;
+using Domain.Entities;
+using Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class ExampleController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public ExampleController(IUnitOfWork unitOfWork)
     {
-        _logger = logger;
+        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Example>>> GetAllAsync()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateTime.Now.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        var response = new ResponseEntity<IEnumerable<Example>>();
+        response.Entity = await _unitOfWork.Examples.GetAllAsync();
+
+        return Ok(response);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Example>> AddAsync([FromBody] Example entity)
+    {
+        var response = new ResponseEntity<Example>();
+        await _unitOfWork.Examples.AddAsync(entity);
+
+        response.Entity = entity;
+
+        return Created("", response);
     }
 }
 
