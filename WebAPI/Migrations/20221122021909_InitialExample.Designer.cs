@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221121140357_InitialExample")]
+    [Migration("20221122021909_InitialExample")]
     partial class InitialExample
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace WebAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Example", b =>
+            modelBuilder.Entity("Domain.Entities.Example", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

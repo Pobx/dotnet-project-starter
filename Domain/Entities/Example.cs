@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Domain
+namespace Domain.Entities
 {
     public class Example : BaseEntity
     {

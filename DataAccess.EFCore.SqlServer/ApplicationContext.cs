@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.EFCore.SqlServer
