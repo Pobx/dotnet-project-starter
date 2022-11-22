@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.EFCore.PostgreSQL.Repositories;
+using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,11 @@ public static class PostgreSQLInfrastructureRegistration
             configuration.GetConnectionString("DefaultConnectionPostgreSQL"),
             b => b.MigrationsAssembly(migrationsAssembly))
         );
+
+        #region Repositories
+        services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddTransient<IExampleRepository, ExampleRepository>();
+        #endregion
 
         return services;
     }
