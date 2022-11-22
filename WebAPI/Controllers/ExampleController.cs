@@ -32,6 +32,7 @@ public class ExampleController : ControllerBase
     {
         var response = new ResponseEntity<Example>();
         await _unitOfWork.Examples.AddAsync(entity);
+        await _unitOfWork.Complete();
 
         response.Entity = entity;
 
