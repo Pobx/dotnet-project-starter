@@ -11,8 +11,8 @@ namespace Domain.Interfaces
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression);
         Task Add(T entity);
         Task AddRange(IEnumerable<T> entities);
-        Task Remove(T entity);
-        Task RemoveRange(IEnumerable<T> entities);
+        void Remove(T entity);
+        void RemoveRange(IEnumerable<T> entities);
     }
 }
 
