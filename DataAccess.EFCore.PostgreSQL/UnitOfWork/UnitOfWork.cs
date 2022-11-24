@@ -15,7 +15,7 @@ namespace DataAccess.EFCore.PostgreSQL
 
         public IExampleRepository Examples { get; private set; }
 
-        public async Task<int> Complete()
+        public async Task<int> CompleteAsync()
         {
             return await _context.SaveChangesAsync();
         }

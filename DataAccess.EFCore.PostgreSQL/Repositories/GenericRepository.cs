@@ -17,14 +17,14 @@ namespace DataAccess.EFCore.PostgreSQL.Repositories
             _entities = context.Set<T>();
         }
 
-        public async Task AddAsync(T entity)
+        public void Add(T entity)
         {
-            await _entities.AddAsync(entity);
+            _entities.Add(entity);
         }
 
-        public async Task AddRangeAsync(IEnumerable<T> entities)
+        public void AddRange(IEnumerable<T> entities)
         {
-            await _entities.AddRangeAsync(entities);
+            _entities.AddRange(entities);
         }
 
         public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression)
@@ -37,7 +37,7 @@ namespace DataAccess.EFCore.PostgreSQL.Repositories
             return await _entities.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(long id)
         {
             return await _entities.FindAsync(id);
         }
@@ -50,6 +50,11 @@ namespace DataAccess.EFCore.PostgreSQL.Repositories
         public void RemoveRange(IEnumerable<T> entities)
         {
             _entities.RemoveRange(entities);
+        }
+
+        public void Update(T entity)
+        {
+            _entities.Entry(entity).State = EntityState.Modified;
         }
     }
 }

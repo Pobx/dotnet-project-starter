@@ -4,7 +4,7 @@ namespace Domain.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IExampleRepository Examples { get; }
-        Task<int> Complete();
+        Task<int> CompleteAsync();
     }
 }
 
