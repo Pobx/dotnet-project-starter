@@ -31,12 +31,41 @@ public class ExampleController : ControllerBase
     public async Task<ActionResult<Example>> AddAsync([FromBody] Example entity)
     {
         var response = new ResponseEntity<Example>();
-        await _unitOfWork.Examples.AddAsync(entity);
-        await _unitOfWork.Complete();
+        _unitOfWork.Examples.Add(entity);
+
+        await _unitOfWork.CompleteAsync();
 
         response.Entity = entity;
 
         return Created("", response);
+    }
+
+    [HttpPut]
+    public async Task<ActionResult<Example>> UpdateAsync([FromBody] Example entity)
+    {
+        var response = new ResponseEntity<Example>();
+        _unitOfWork.Examples.Update(entity);
+
+        await _unitOfWork.CompleteAsync();
+
+        response.Entity = entity;
+
+        return Ok(response);
+    }
+
+    [HttpDelete]
+    public async Task<ActionResult> RemoveAsync([FromQuery] long id)
+    {
+        var entity = await _unitOfWork.Examples.GetByIdAsync(id);
+        if (entity is null)
+        {
+            return NoContent();
+        }
+
+        _unitOfWork.Examples.Remove(entity);
+        await _unitOfWork.CompleteAsync();
+
+        return NoContent();
     }
 }
 
