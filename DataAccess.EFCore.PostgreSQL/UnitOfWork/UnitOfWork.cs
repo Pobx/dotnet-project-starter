@@ -7,6 +7,8 @@ namespace DataAccess.EFCore.PostgreSQL
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationContext _context;
+        private bool _disposed = false;
+
         public UnitOfWork(ApplicationContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -22,7 +24,23 @@ namespace DataAccess.EFCore.PostgreSQL
 
         public void Dispose()
         {
-            _context.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+
+            _disposed = true;
         }
     }
 }
