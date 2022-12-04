@@ -37,7 +37,7 @@ namespace DataAccess.EFCore.PostgreSQL.Repositories
             return await _entities.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(long id)
+        public async Task<T?> GetByIdAsync(long id)
         {
             return await _entities.FindAsync(id);
         }
