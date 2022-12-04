@@ -56,13 +56,7 @@ public class ExampleController : ControllerBase
     [HttpDelete]
     public async Task<ActionResult> RemoveAsync([FromQuery] long id)
     {
-        var entity = await _unitOfWork.Examples.GetByIdAsync(id);
-        if (entity is null)
-        {
-            return NoContent();
-        }
-
-        _unitOfWork.Examples.Remove(entity);
+        _unitOfWork.Examples.Remove(id);
         await _unitOfWork.CompleteAsync();
 
         return NoContent();

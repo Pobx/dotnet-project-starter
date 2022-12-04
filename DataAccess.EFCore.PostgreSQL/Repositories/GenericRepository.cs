@@ -42,8 +42,14 @@ namespace DataAccess.EFCore.PostgreSQL.Repositories
             return await _entities.FindAsync(id);
         }
 
-        public void Remove(T entity)
+        public void Remove(long id)
         {
+            var entity = _entities.Find(id);
+            if (entity is null)
+            {
+                return;
+            }
+
             _entities.Remove(entity);
         }
 
