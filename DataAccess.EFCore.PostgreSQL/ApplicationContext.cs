@@ -18,11 +18,11 @@ public class ApplicationContext : DbContext
             {
                 case EntityState.Added:
                     entry.Entity.CreatedDate = DateTime.Now;
-                    entry.Entity.CreatedBy = "system";
+                    entry.Entity.CreatedBy = String.IsNullOrEmpty(entry.Entity.CreatedBy) ? "System" : entry.Entity.CreatedBy;
                     break;
                 case EntityState.Modified:
                     entry.Entity.UpdatedDate = DateTime.Now;
-                    entry.Entity.UpdatedBy = "system";
+                    entry.Entity.UpdatedBy = String.IsNullOrEmpty(entry.Entity.UpdatedBy) ? "System" : entry.Entity.UpdatedBy;
                     break;
             }
         }
