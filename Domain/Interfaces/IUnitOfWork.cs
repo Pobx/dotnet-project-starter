@@ -1,5 +1,4 @@
-﻿using System;
-namespace Domain.Interfaces
+﻿namespace Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
