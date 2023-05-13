@@ -8,7 +8,7 @@ public class ApplicationContext : DbContext
     {
     }
 
-    public DbSet<Example> Examples { get; set; }
+    public DbSet<Example> Examples => Set<Example>();
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {

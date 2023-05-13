@@ -9,8 +9,7 @@ namespace DataAccess.EFCore.SqlServer
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
         }
-
-        public DbSet<Example> Examples { get; set; }
+        public DbSet<Example> Examples => Set<Example>();
     }
 }
 
