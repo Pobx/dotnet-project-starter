@@ -1,7 +1,7 @@
 ﻿using DataAccess.EFCore.PostgreSQL.Repositories;
 using Domain.Interfaces;
+using Domain.Utils;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,9 +12,9 @@ public static class PostgreSQLInfrastructureRegistration
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         var migrationsAssembly = configuration["ProjectName"]?.ToString() ?? throw new ArgumentNullException("Project name not setting");
-
+        
         services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(
-            configuration.GetConnectionString("DefaultConnectionPostgreSQL"),
+            configuration.GetConnectionString(DatabaseNames.DefaultConnectionPostgreSQL),
             b => b.MigrationsAssembly(migrationsAssembly))
         );
 

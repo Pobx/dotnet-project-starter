@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using Domain.Utils;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +11,7 @@ public static class SqlServerInfrastructureRegistration
         var migrationsAssembly = configuration["ProjectName"]?.ToString() ?? throw new ArgumentNullException("Project name not setting");
         
         services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(
-            configuration.GetConnectionString("DefaultConnectionSqlServer"),
+            configuration.GetConnectionString(DatabaseNames.DefaultConnectionSqlServer),
             b => b.MigrationsAssembly(migrationsAssembly))
         );
 
