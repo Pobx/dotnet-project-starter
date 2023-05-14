@@ -8,10 +8,10 @@ public static class SqlServerInfrastructureRegistration
 {
     public static IServiceCollection AddSqlServerInfrastructureRegistration(this IServiceCollection services, IConfiguration configuration)
     {
-        var migrationsAssembly = configuration["ProjectName"]?.ToString() ?? throw new ArgumentNullException("Project name not setting");
-        
+        var migrationsAssembly = configuration[ProjectConfiguration.ProjectName]?.ToString() ?? throw new ArgumentNullException(nameof(ProjectConfiguration.ProjectName));
+
         services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(
-            configuration.GetConnectionString(DatabaseNames.DefaultConnectionSqlServer),
+            configuration.GetConnectionString(ProjectConfiguration.DefaultConnectionSqlServer),
             b => b.MigrationsAssembly(migrationsAssembly))
         );
 
