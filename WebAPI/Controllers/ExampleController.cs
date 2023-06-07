@@ -18,7 +18,7 @@ public class ExampleController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Example>>> GetAllAsync()
+    public async Task<IActionResult> GetAll()
     {
         var response = new ResponseEntity<IEnumerable<Example>>();
         response.Entity = await _unitOfWork.Examples.GetAllAsync();
@@ -26,8 +26,17 @@ public class ExampleController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet()]
+    public async Task<IActionResult> GetById(long id)
+    {
+        var response = new ResponseEntity<Example>();
+        response.Entity = await _unitOfWork.Examples.GetByIdAsync(id);
+
+        return Ok(response);
+    }
+
     [HttpPost]
-    public async Task<ActionResult<Example>> AddAsync([FromBody] Example entity)
+    public async Task<IActionResult> Add([FromBody] Example entity)
     {
         var response = new ResponseEntity<Example>();
         _unitOfWork.Examples.Add(entity);
@@ -36,11 +45,13 @@ public class ExampleController : ControllerBase
 
         response.Entity = entity;
 
-        return Created("", response);
+        var actionName = nameof(GetById);
+        var routeValues = new { id = entity.Id };
+        return CreatedAtAction(actionName, routeValues, response);
     }
 
     [HttpPut]
-    public async Task<ActionResult<Example>> UpdateAsync([FromBody] Example entity)
+    public async Task<IActionResult> Update([FromBody] Example entity)
     {
         var response = new ResponseEntity<Example>();
         _unitOfWork.Examples.Update(entity);
@@ -53,7 +64,7 @@ public class ExampleController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<ActionResult> RemoveAsync([FromQuery] long id)
+    public async Task<IActionResult> RemoveAsync([FromQuery] long id)
     {
         _unitOfWork.Examples.Remove(id);
         await _unitOfWork.CompleteAsync();
