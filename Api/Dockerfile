@@ -29,4 +29,4 @@ ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 ENV LD_PRELOAD=/opt/datadog/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
 
-ENTRYPOINT ["dotnet", "WebAPI.dll"]% 
+ENTRYPOINT ["dotnet", "Api.dll"]% 

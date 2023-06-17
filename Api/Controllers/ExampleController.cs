@@ -3,10 +3,10 @@ using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPI.Controllers;
+namespace Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class ExampleController : ControllerBase
 {
 
@@ -26,7 +26,7 @@ public class ExampleController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<IActionResult> GetById(long id)
     {
         var response = new ResponseEntity<Example>();
