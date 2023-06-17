@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.EFCore.SqlServer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.EFCore.PostgreSQL", "DataAccess.EFCore.PostgreSQL\DataAccess.EFCore.PostgreSQL.csproj", "{DB51D395-6179-440B-B571-70B70A4ACED6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{AFE434DC-B933-4BA4-8ACC-969273193EE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DB51D395-6179-440B-B571-70B70A4ACED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB51D395-6179-440B-B571-70B70A4ACED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB51D395-6179-440B-B571-70B70A4ACED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFE434DC-B933-4BA4-8ACC-969273193EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE434DC-B933-4BA4-8ACC-969273193EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE434DC-B933-4BA4-8ACC-969273193EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE434DC-B933-4BA4-8ACC-969273193EE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
