@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Configuration;
+using MMLib.Ocelot.Provider.AppConfiguration;
 using MMLib.SwaggerForOcelot.DependencyInjection;
 using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,17 +14,25 @@ builder.Services.AddControllers();
 
 var environment = builder.Environment;
 var contentRootPath = builder.Environment.ContentRootPath;
-var ocelotConfigurationFolder = builder.Configuration.GetValue<string>("OcelotConfigurationFolder") ?? throw new ArgumentException("OcelotConfigurationFolder is not in appsetting.json");
+var routesDirectory = builder.Configuration.GetValue<string>("Ocelot:Routes") ?? throw new ArgumentException("Routes is not in appsetting.json");
 
 builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 {
-    options.Folder = ocelotConfigurationFolder;
+    options.Folder = routesDirectory;
 });
 
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
-builder.Services.AddOcelot(builder.Configuration);
+
+builder.Services.AddOcelot().AddAppConfiguration();
+
 
 var app = builder.Build();
+
+
+// Configure the HTTP request pipeline.
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
 
 app.UseSwaggerForOcelotUI(opt =>
 {
@@ -33,10 +43,8 @@ app.UseSwaggerForOcelotUI(opt =>
   };
 });
 
-// Configure the HTTP request pipeline.
-app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseOcelot().Wait();
 
 app.MapControllers();
 
