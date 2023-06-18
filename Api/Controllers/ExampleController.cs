@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("v1/[controller]/[action]")]
 public class ExampleController : ControllerBase
 {
 
