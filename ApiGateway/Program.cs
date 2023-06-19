@@ -1,3 +1,4 @@
+using ApiGateway.Handlers.Policies;
 using Microsoft.Extensions.Configuration;
 using MMLib.Ocelot.Provider.AppConfiguration;
 using MMLib.SwaggerForOcelot.DependencyInjection;
@@ -23,7 +24,9 @@ builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
-builder.Services.AddOcelot().AddAppConfiguration();
+builder.Services.AddOcelot()
+                .AddAppConfiguration()
+                .AddDelegatingHandler<HttpRequestCircuitBreakingDelegatingHandler>(true);
 
 
 var app = builder.Build();

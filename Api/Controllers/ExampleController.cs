@@ -71,5 +71,23 @@ public class ExampleController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Hello()
+    {
+        var random = new Random();
+        Thread.Sleep(2000);
+        throw new Exception("Random Timeout");
+        var value = random.Next(0, 2);
+        if (value == 0)
+        {
+            //Thread.Sleep(10000);
+            //throw new Exception("Random Timeout");
+        }
+
+        return Ok(value);
+    }
+
+   
 }
 
